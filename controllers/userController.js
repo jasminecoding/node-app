@@ -126,6 +126,29 @@ exports.home = async function(req, res) {
   }
 }
 
+
+exports.buy = async function(req, res) {
+  if (req.session.user) {
+    // fetch feed of posts for current user
+    let posts = await Post.getFeed(req.session.user._id)
+    res.render('buy', {posts: posts})
+  } else {
+    res.render('home-guest', {regErrors: req.flash('regErrors')})
+  }
+}
+
+
+exports.sell = async function(req, res) {
+  if (req.session.user) {
+    // fetch feed of posts for current user
+    let posts = await Post.getFeed(req.session.user._id)
+    res.render('sell', {posts: posts})
+  } else {
+    res.render('home-guest', {regErrors: req.flash('regErrors')})
+  }
+}
+
+
 exports.ifUserExists = function(req, res, next) {
   User.findByUsername(req.params.username).then(function(userDocument) {
     req.profileUser = userDocument

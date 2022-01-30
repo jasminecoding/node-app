@@ -11,6 +11,8 @@ router.post('/login', userController.login)
 router.post('/logout', userController.logout)
 router.post('/doesUsernameExist', userController.doesUsernameExist)
 router.post('/doesEmailExist', userController.doesEmailExist)
+router.get('/buy', userController.buy)
+router.get('/sell', userController.sell)
 
 // profile related routes
 router.get('/profile/:username', userController.ifUserExists, userController.sharedProfileData, userController.profilePostsScreen)
@@ -25,6 +27,8 @@ router.get('/post/:id/edit', userController.mustBeLoggedIn, postController.viewE
 router.post('/post/:id/edit', userController.mustBeLoggedIn, postController.edit)
 router.post('/post/:id/delete', userController.mustBeLoggedIn, postController.delete)
 router.post('/search', postController.search)
+router.post('/sell-post', userController.mustBeLoggedIn, postController.sellPost)
+router.get('/sell-post', userController.mustBeLoggedIn, postController.viewCreateScreen)
 
 // follow related routes
 router.post('/addFollow/:username', userController.mustBeLoggedIn, followController.addFollow)
